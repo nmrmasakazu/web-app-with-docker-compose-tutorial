@@ -1,0 +1,43 @@
+version: "3"
+services:
+    docker-mysql:
+        build:
+            context: mysql/
+        restart: always
+        ports:
+            - "3306:3306"
+        container_name: docker-mysql
+        networks:
+            - app-net
+
+    web-app:
+        build:
+            context: .
+        expose:
+            - "8080"
+        ports: 
+            - "8080:8080"
+        volumes: 
+            - .:/app
+        depends_on:
+            - docker-mysql
+        container_name: web-app
+        tty: true
+        networks:
+            - app-net
+
+    docker-nginx:
+        build:
+            context: nginx/
+        restart: always
+        ports: 
+            - "80:80"
+        depends_on:
+            - web-app
+        container_name: docker-nginx
+        networks:
+            - app-net
+
+networks:
+    app-net:
+        driver: bridge
