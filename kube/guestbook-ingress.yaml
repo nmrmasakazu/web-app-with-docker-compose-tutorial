@@ -8,7 +8,6 @@ metadata:
   name: guestbook-ingress        # Ingressリソースの名前
 spec:
   rules:                         # ルーティングのルールの配列
-  - host: masa.example.com
   - http:
       paths:
       - path: /
