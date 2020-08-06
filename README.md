@@ -36,6 +36,7 @@ kubectl config use-context docker-for-desktop
 # docker-for-desktopとなっていることを確認
 kubectl config current-context
 # ローカルのみ
+kubectl create namespace ingress-nginx
 kubectl apply -k prepare/
 # Masterの確認（Podの集まり）
 kubectl get pods --namespace=kube-system
