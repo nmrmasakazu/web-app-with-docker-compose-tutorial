@@ -1,0 +1,20 @@
+# Podの集合(主にReplicaSet)に対する経路やサービスディスカバリを提供
+# クラスタ内DNSで、<Service名>.<Namespace名>で名前解決可能に
+# 同じNamespace内なら<Service名>だけでOK
+# ここでもLabelによって対象のPodが検索される
+# 対象のPodが動的に入れ替わったりしても、Labelさえついていれば一貫した名前でアクセスできる
+
+apiVersion: v1
+kind: Service                 # Serviceのマニフェスト
+metadata:
+  name: frontend              # Serviceリソースの名前
+  labels:                     # ServiceにつけるLabel
+    app: guestbook
+    tier: frontend
+spec:
+  type: NodePort              # Serviceの種別，NodePortはクラスタ外からアクセスできる．
+  ports:
+  - port: 80                  # アクセスを受け付けるポート
+  selector:                   # 対象のPodを検索するときのLabel
+    app: guestbook
+    tier: frontend

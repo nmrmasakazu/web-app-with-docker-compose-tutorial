@@ -23,3 +23,23 @@ docker-compose up
 docker-compose down
 ```
 
+
+
+【別件おまけ】kubernetesの場合（kube配下，上記とは全く関係がない）
+
+https://qiita.com/Kta-M/items/ce475c0063d3d3f36d5d
+
+```bash
+cd kube
+# Masterの確認（Podの集まり）
+kubectl get pods --namespace=kube-system
+# デプロイ
+kubectl apply -f ./
+# 終了
+kubectl delete -f ./
+# Ingressの情報を取得
+kubectl get ingress
+# Podの情報を取得
+kubectl get pods
+```
+

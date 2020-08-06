@@ -1,0 +1,17 @@
+# Serviceをクラスタ外に公開
+# Service(NodePort): L4層レベルでの制御
+# Ingress: L7層レベルでの制御
+
+apiVersion: extensions/v1beta1
+kind: Ingress                    # Ingressのマニフェスト
+metadata:
+  name: guestbook-ingress        # Ingressリソースの名前
+spec:
+  rules:                         # ルーティングのルールの配列
+  - host: masa.example.com
+  - http:
+      paths:
+      - path: /
+        backend:                 # "frontend"Serviceの80番ポートにアクセス
+          serviceName: frontend
+          servicePort: 80
