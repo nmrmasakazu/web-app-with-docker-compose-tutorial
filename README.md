@@ -31,6 +31,12 @@ https://qiita.com/Kta-M/items/ce475c0063d3d3f36d5d
 
 ```bash
 cd kube
+# 下準備
+kubectl config use-context docker-for-desktop
+# docker-for-desktopとなっていることを確認
+kubectl config current-context
+# ローカルのみ
+kubectl apply -k prepare/
 # Masterの確認（Podの集まり）
 kubectl get pods --namespace=kube-system
 # デプロイ
